@@ -2,6 +2,8 @@ Overview
 
 In this project, a semi-supervised learning interface using Tri-training [1] and Tri-training with disagreement [2] method have been implemented. Tri-training algorithm takes in three classifiers of different models or same model each trained with a subset of original labeled data using bootstrap sampling. Further unlabeled data will be added to a model’s training set if it can achieve agreed label prediction by other two models. Training stops when all the three models do not change anymore. Tri-training with disagreement algorithm works similarly to Tri-training algorithm except it only adds unlabeled data to one’s training set if one’s prediction disagrees with the other two models’ agreed prediction.
 
+
+
 Implementation
 
 TriTraining
@@ -12,6 +14,7 @@ Note that the unlabeled dataset will not be changed after each iteration.
 Tri Training with Disagreement
 
 The Tri Training with disagreement wrapped in TriTrainingwDisagreement class is coded in python and implements the algorithm from Tri Training paper [1] and adjusts for pseudo label updating only if one’s prediction disagrees with the other two models’ agreed prediction based on Tri Training with disagreement paper [2]. The TriTrainingwDisagreement class implements fit(), predict(), score() API, detailed usage refer to the session below. On a separate note, part of the implementation also uses python’s math, numpy and sklearn packages. Math package is used here for floor, ceiling math functions, numpy package used for numpy array manipulations as the fit(), predict(), score() APIs accepts/returns numpy input/output, and sklearn package used for its resample function for subsample/boostramp as required in the original algorithm [1] and accuracy score function for the score() API. 
+
 
 
 Usage
@@ -25,11 +28,14 @@ To initialize Self-training, users should assign a sklearn classifier which woul
 Like sklearn classifiers, each methods provides three basic function APIs: fit(), predict() and score(). Those functions are similar to those of sklearn classifiers, but some of the parameters have been modified based on the semi-supervised algorithms. In particular, fit() function need not only the labeled dataset: L_X and L_y, but also the unlabeled data U_X. All of three should be numpy arrays, and U_X should have the same number of attributes as L_X. 
 
 
+
 Contribution
 
 Xunyi implemented the TriTraining and Self-training.
 
 Xiaohong implemented the TriTraining with disagreement
+
+
 
 Reference
 
